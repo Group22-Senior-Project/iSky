@@ -4,7 +4,7 @@ import './Weather.css';
 const Weather = () => {
   return (
     <div class="weatherbox">
-        weather
+        Weather
       </div>
   )
 }
