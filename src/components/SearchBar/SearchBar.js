@@ -23,7 +23,7 @@ const SearchBar = () => {
       min="2022-02-17"
       max="2023-12-31"
     />
-    <button type="Submit"> Enter </button>
+    <button id="enter" type="Submit"> Enter </button>
     </div>
     
   )
