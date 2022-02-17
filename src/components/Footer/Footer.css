@@ -1,0 +1,14 @@
+h4 {
+  background-color: rgb(38, 99, 179);
+  position: fixed;
+  font-family: 'Times New Roman', Times, serif;
+  bottom: 0px;
+  width: 100%;
+  height: 2.5rem;    
+  margin: 0;
+  padding: auto;
+  text-align: center;   
+  color: white;
+  text-align: center;     
+}
+
