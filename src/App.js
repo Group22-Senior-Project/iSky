@@ -1,7 +1,8 @@
 import './App.css';
 import Weather from './components/Weather/Weather'
 import SearchBar from './components/SearchBar/SearchBar'
-import Map from './components/Map/Map.js'
+import Map from './components/Map/Map'
+import Covid from './components/Covid/Covid'
 
 function App() {
    return (
@@ -11,6 +12,7 @@ function App() {
             <Weather />
             <Map />
          </div>
+         <Covid />
       </div>
    );
 }

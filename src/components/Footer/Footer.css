@@ -1,6 +1,6 @@
 h4 {
   background-color: rgb(38, 99, 179);
-  position: absolute;
+  position: fixed;
   font-family: 'Times New Roman', Times, serif;
   bottom: 0px;
   width: 100%;
