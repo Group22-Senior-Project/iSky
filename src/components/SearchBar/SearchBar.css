@@ -1,0 +1,19 @@
+.search {
+  background-color: yellow;
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+  justify-content: space-evenly;
+}
+
+#searchbar {
+  border-radius: 20px;
+  padding-left: 10px;
+  height: 25px;
+  border: solid 2px black;
+}
+
+#start, #end {
+  padding-left: 5px;
+  width: 135px;
+}
