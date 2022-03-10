@@ -1,0 +1,20 @@
+.map-container {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   margin: 50px 0 0 0;
+}
+
+.map-parent {
+   max-width: 1000px;
+   width: 70%;
+}
+
+.map-text {
+   text-align: center;
+   background-color: rgb(86, 192, 139);
+   display: inline-block;
+   height: 600px;
+   width: 100%;
+}
