@@ -3,5 +3,18 @@
    flex-direction: column;
    justify-content: space-between;
    min-height: 670px;
-   background-image: url('../../assets/cloudy3.jpg');
+   background-image: url('../../assets/blur.jpg');
+   background-repeat: no-repeat, no-repeat;
+   background-position: center;
+   background-size: cover;
+   background-attachment: fixed;
+   text-align: center;
 }
+
+/**
+  background-repeat: no-repeat, no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  text-align: center;
+*/

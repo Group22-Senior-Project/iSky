@@ -78,7 +78,7 @@ export default function Header() {
                />
             </div>
             <div className="header-logo">
-               <span>ISKY VAC PLANNER</span>
+               <span>iSKY</span>
             </div>
             <div
                className={
