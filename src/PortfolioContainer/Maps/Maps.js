@@ -1,4 +1,3 @@
-// import React, { useEffect } from 'react';
 import ScreenHeading from '../../utilities/ScreenHeading/ScreenHeading';
 import ScrollService from '../../utilities/ScrollService';
 import Animations from '../../utilities/Animations';
@@ -16,14 +15,7 @@ export default function Maps(props) {
    // const fadeInSubscription =
       ScrollService.currentScreenFadeIn.subscribe(fadeInScreenHandler);
 
-//    // Map Token
-//    const MAPBOX_TOKEN =
-//       'pk.eyJ1IjoicmljaGFyZHRyYW4yOTgiLCJhIjoiY2wwMXV3djh5MG9lbzNkbnBkOXZwNmwxcSJ9.aWoUK1oWOPOwEYRyBO4U7Q';
-
 const containerStyle = {
-   // position: 'relative',
-   // top: '100px',
-   // alignitems: 'center',
    width: '100%',
    height: '600px'
  
@@ -57,8 +49,6 @@ const containerStyle = {
             
 
                </div>
-
-               {/* <div className="map-text">Map</div> */}
       </div>
    )  : <></>
 }
