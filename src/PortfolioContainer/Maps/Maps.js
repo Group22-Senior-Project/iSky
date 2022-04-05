@@ -5,7 +5,6 @@ import Animations from '../../utilities/Animations';
 import './Maps.css';
 import React from 'react'
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
-// //import Map from 'react-map-gl';
 
 export default function Maps(props) {
    // Scrolling Animation
@@ -14,7 +13,7 @@ export default function Maps(props) {
       Animations.animations.fadeInScreen(props.id);
    };
 
-   const fadeInSubscription =
+   // const fadeInSubscription =
       ScrollService.currentScreenFadeIn.subscribe(fadeInScreenHandler);
 
 //    // Map Token
@@ -30,9 +29,9 @@ const containerStyle = {
  
  };
  
- const center = {
+ const location = {
    lat: 37.4323, 
-   lng: -121.8996
+   lng: -121.8997
  };
  
 
@@ -40,44 +39,30 @@ const containerStyle = {
      id: 'google-map-script',
      googleMapsApiKey: "AIzaSyANPuESfFYjQXGTxPE7gEPvhddHvuh6IEI"
    })
- 
-   const [map, setMap] = React.useState(null)
- 
-   const onLoad = React.useCallback(function callback(maps) {
-     const bounds = new window.google.maps.LatLngBounds();
-     maps.fitBounds(bounds);
-     setMap(maps)
-   }, [])
- 
-   const onUnmount = React.useCallback(function callback(map) {
-     setMap(null)
-   }, [])
-       
-   
- 
 
+ 
    return isLoaded ? (
       <div className="map-container screen-container" id={props.id || ''}>
          <div className="map-parent">
+
             <ScreenHeading title={'Map'} subHeading={'This is the Map'} />
             <GoogleMap
+               id="circle-example"
                mapContainerStyle={containerStyle}
-               center={center}
                zoom={9}
-               onLoad={onLoad}
-               onUnmount={onUnmount}
-            >
+               center={location}
+            />
                { /* Child components, such as markers, info windows, etc. */ }
-               <></>
-            </GoogleMap>
+            
+            
+
                </div>
 
-               {/* Sample div */}
                {/* <div className="map-text">Map</div> */}
       </div>
    )  : <></>
 }
 
-// /* npm i react-map-gl */
+// npm i @react-google-maps/api
 
 // export default React.memo(Map)
