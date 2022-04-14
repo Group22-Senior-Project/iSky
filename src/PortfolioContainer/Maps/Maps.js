@@ -22,8 +22,10 @@ const containerStyle = {
  };
  
  const location = {
-   lat: 37.4323, 
-   lng: -121.8997
+   lat: 37.3382, 
+   lng: -121.8863
+//  lat: 33.610600, 
+//  lng: -112.149640
  };
  
 
@@ -41,7 +43,7 @@ const containerStyle = {
             <GoogleMap
                id="circle-example"
                mapContainerStyle={containerStyle}
-               zoom={9}
+               zoom={14}
                center={location}
             />
                { /* Child components, such as markers, info windows, etc. */ }
