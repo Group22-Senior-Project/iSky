@@ -98,7 +98,7 @@ export default function Weather(props) {
                </div>
 
                {/* Bottom Part */}
-               {data.name != undefined && (
+               {data.name !== undefined && (
                   <div className="weather-bottom">
                      <div className="weather-feels">
                         {data.main ? (

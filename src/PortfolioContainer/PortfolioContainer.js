@@ -16,5 +16,6 @@ export default function PortfolioContainer() {
       );
    };
 
-   return <div className="portfolio-container">{mapAllScreens()}</div>;
+   return <div className="portfolio-container">{mapAllScreens()} </div>
+   
 }
