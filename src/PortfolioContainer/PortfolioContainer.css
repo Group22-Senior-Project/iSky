@@ -1,0 +1,7 @@
+.search input {
+   margin: 0 auto;
+}
+
+.search ::placeholder {
+   color: gray;
+}

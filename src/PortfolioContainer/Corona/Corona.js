@@ -17,9 +17,9 @@ export default function Corona(props) {
    return (
       <div className="corona-container screen-container" id={props.id || ''}>
          <div className="corona-parent">
-            <ScreenHeading 
+            <ScreenHeading
                title={'Corona'}
-               // subHeading={'This is Corona'} 
+               // subHeading={'This is Corona'}
             />
          </div>
 

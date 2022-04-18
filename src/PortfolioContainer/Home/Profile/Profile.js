@@ -23,24 +23,25 @@ export default function Profile() {
                   <span className="primary-text">
                      {' '}
                      <h1>
-                        {' '}
+                        {/* {' '}
                         <Typical
                            loop={Infinity}
                            steps={[
                               'Planning a trip? 🌉',
-                              1000,
+                              5000,
                               'College Student.. 📚',
-                              1000,
+                              5000,
                               'Travel Information 🌎',
-                              1000,
+                              5000,
                               'Weather Forecasts ☀️',
-                              1000,
+                              5000,
                               'Looking for COVID Updates? 💘',
-                              1000,
+                              5000,
                               'iSky can Help! ✅',
-                              1000,
+                              5000,
                            ]}
-                        />
+                        /> */}
+                        Planning a trip? 🌉
                      </h1>
                      <span className="profile-role-tagline">
                         The vacation planner you always wanted!
