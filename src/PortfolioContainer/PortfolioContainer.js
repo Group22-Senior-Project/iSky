@@ -97,6 +97,8 @@ export default function PortfolioContainer() {
                onKeyPress={searchLocation}
                placeholder="City, State/Country"
             />
+            <input type="date" />
+            <input type="date" />
          </div>
          <Map.component
             screenName={Map.screen_name}
