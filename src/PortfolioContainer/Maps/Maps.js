@@ -14,55 +14,41 @@ export default function Maps(props) {
    };
 
    // const fadeInSubscription =
-      ScrollService.currentScreenFadeIn.subscribe(fadeInScreenHandler);
+      // ScrollService.currentScreenFadeIn.subscribe(fadeInScreenHandler);
 
-   
-   // const [coord, setCoord] = useState(props.coord);
-   // console.log(props);
    const coord = {
       lat: props.lat,
       lng: props.lon
    };
    // console.log(coord);
    
-   
-
    const containerStyle = {
       width: '100%',
       height: '600px'
    
    };
- 
-   // const location = {
-   //    lat: 37.3382, 
-   //    lng: -121.8863
-   // //  lat: 33.610600, 
-   // //  lng: -112.149640
-   // };
- 
 
    const { isLoaded } = useJsApiLoader({
      id: 'google-map-script',
      googleMapsApiKey: "AIzaSyANPuESfFYjQXGTxPE7gEPvhddHvuh6IEI"
    })
 
- 
    return isLoaded ? (
       <div className="map-container screen-container" id={props.id || ''}>
          <div className="map-parent">
 
-            <ScreenHeading title={'Map'} subHeading={'This is the Map'} />
+            <ScreenHeading 
+               title={'Map'} 
+               // subHeading={'This is the Map'} 
+            />
             <GoogleMap
                id="circle-example"
                mapContainerStyle={containerStyle}
                zoom={14}
                center={coord}
             />
-               { /* Child components, such as markers, info windows, etc. */ }
-            
-            
-
-               </div>
+            { /* Child components, such as markers, info windows, etc. */ }
+            </div>
       </div>
    )  : <></>
 }

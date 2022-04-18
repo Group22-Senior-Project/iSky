@@ -21,7 +21,7 @@ export default function Weather(props) {
          <div className="weather-parent">
             <ScreenHeading
                title={'Weather'}
-               subHeading={'This is the Weather'}
+               // subHeading={'This is the Weather'}
             />
          </div>
 
