@@ -17,11 +17,14 @@ export default function Corona(props) {
    return (
       <div className="corona-container screen-container" id={props.id || ''}>
          <div className="corona-parent">
-            <ScreenHeading title={'Corona'} subHeading={'This is Corona'} />
+            <ScreenHeading 
+               title={'Corona'}
+               // subHeading={'This is Corona'} 
+            />
          </div>
 
          {/* Sample div */}
-         <div className="corona-text">Corona</div>
+         {/* <div className="corona-text">Corona</div> */}
       </div>
    );
 }
