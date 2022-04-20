@@ -7,6 +7,7 @@ import cx from "classnames";
 const Cards = ({
   data: { confirmed, recovered, deaths, lastUpdate },
   country,
+  daily,
   }) => {
 
   if (!confirmed) {
@@ -30,6 +31,12 @@ const Cards = ({
     //   value: recovered.value,
     //   bottomText: "Number of recoveries from COVID-19",
     // },
+    {
+      style: styles.daily,
+      text: "New Confirmed",
+      value: daily,
+      bottomText: "New confirmed cases of COVID-19",
+    },
     {
       style: styles.deaths,
       text: "Deaths",
@@ -55,7 +62,7 @@ const Cards = ({
             md={2}
             className={cx(styles.Card, detail.style)}
             key={index}
-            style={{ margin: "0px 75px", padding: "12px" }}
+            style={{ margin: "0px 35px", padding: "12px" }}
           >
             <CardContent>
               <Typography color="textPrimary" gutterBottom>

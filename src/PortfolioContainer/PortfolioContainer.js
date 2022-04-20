@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { TOTAL_SCREENS } from '../utilities/commonUtils';
 import axios from 'axios';
 
-import { fetchData } from '../api';
+import { fetchData, fetchNewConfirmed, fetchGlobalData  } from '../api';
 
 import Cards from './Corona/Cards.jsx';
 import Chart from './Corona/Chart.jsx';
@@ -29,6 +29,13 @@ export default function PortfolioContainer() {
    const [country, setCountry] = useState(' ');
    const [covidData, setCovidData] = useState({});
 
+
+   // Daily New Covid Data 
+   // dailyCovidDataList is an array containing like over 700 days of data
+   // dailyCovidData is a day of covid data
+   const [dailyCovidDataList, setDailyCovidDataList] = useState([]);
+   const [dailyCovidData, setDailyCovidData] = useState();
+
    // This function loads the first thing the page loads
    // creates a asynchornous function which
    // calls the fetchData() function from index.js
@@ -38,19 +45,25 @@ export default function PortfolioContainer() {
          const APIData = await fetchData();
          console.log(APIData);
          setCovidData(APIData);
+
+         const globalDaily = await fetchGlobalData();
+         setDailyCovidData(globalDaily[0].confirmed);
+         setDailyCovidDataList(globalDaily);
+         console.log(globalDaily);
       };
 
       loadAPI();
    }, []);
 
-   // fetches and sets the covid data of a country
+   // Fetches and sets the covid data of a country 
+   // using mathdroid's covid api
    const getAndSetCountryData = async (country) => {
       const gd = await fetchData(country);
       console.log(gd);
       setCovidData(gd);
    };
 
-   // sets variables and the update functions
+   // Sets variables and the update functions
    // for longitude and latitude
    // default variables are within useState parentheses
    const [lat, setLat] = useState(37.3382);
@@ -76,11 +89,26 @@ export default function PortfolioContainer() {
             // covid cards and chart
             setCountry(response.data.sys.country);
             getAndSetCountryData(response.data.sys.country);
+
+            getCountryDailyCovidData(response.data.sys.country)
          });
          // Resets the search text to ''
          setLocation('');
       }
    };
+
+   // Gets a country's daily covid data array 
+   // and the current daily covid cases.
+   // It sets the const DailyCovidDataList to the array.
+   // Also sets the daily covid cases which is 
+   // the first element of that array.
+   const getCountryDailyCovidData = async (country) => {
+      const daily_data = await fetchNewConfirmed(country)
+      // console.log(daily_data)
+      setDailyCovidDataList(daily_data)
+      setDailyCovidData(daily_data[0].confirmed)
+      console.log(daily_data[0].confirmed)
+    }
 
    return (
       <div>
@@ -118,8 +146,8 @@ export default function PortfolioContainer() {
             key={Corona.screen_name}
             id={Corona.screen_name}
          />
-         <Cards data={covidData} country={country}></Cards>
-         <Chart data={covidData} country={country}></Chart>
+         <Cards data={covidData} country={country} daily={dailyCovidData}></Cards>
+         <Chart data={dailyCovidDataList} country={country}></Chart>
       </div>
    );
 }
