@@ -22,26 +22,35 @@ const Chart = (props) => {
 
   if(data) {
   lineChart = data.length ? (
-    <Line
+    <div>
+      <Line
+        data={{
+          labels: data.map(({ date }) => date),
+          datasets: [
+            {
+              data: data.map(({ confirmed }) => confirmed),
+              label: "Daily Confirmed Cases",
+              borderColor: "#3333ff",
+              fill: true,
+            },
+          ],
+        }}
+      />
+      <Line
       data={{
-        labels: data.map(({ date }) => date),
-        datasets: [
-          {
-            data: data.map(({ confirmed }) => confirmed),
-            label: "Daily Confirmed Cases",
-            borderColor: "#3333ff",
-            fill: true,
-          },
-          {
-            data: data.map(({ deaths }) => deaths),
-            label: "Daily Deaths",
-            borderColor: "red",
-            backgroundColor: "rgba(255,0,0,0.5)",
-            fill: true,
-          },
-        ],
-      }}
-    />
+          labels: data.map(({ date }) => date),
+          datasets: [
+            {
+              data: data.map(({ deaths }) => deaths),
+              label: "Daily Deaths",
+              borderColor: "red",
+              backgroundColor: "rgba(255,0,0,0.5)",
+              fill: true,
+            },
+          ],
+        }}
+      />
+    </div>
   ) : null;
     }
 
