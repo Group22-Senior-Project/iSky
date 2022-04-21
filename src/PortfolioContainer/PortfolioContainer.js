@@ -11,7 +11,7 @@ import './PortfolioContainer.css';
 
 export default function PortfolioContainer() {
    // Sets a const for every component from
-   // component array in commonUtils.js
+   // the component array in commonUtils.js
    const Home = TOTAL_SCREENS[0];
    const Map = TOTAL_SCREENS[1];
    const Weather = TOTAL_SCREENS[2];
@@ -31,8 +31,9 @@ export default function PortfolioContainer() {
 
 
    // Daily New Covid Data 
-   // dailyCovidDataList is an array containing like over 700 days of data
-   // dailyCovidData is a day of covid data
+   // dailyCovidDataList is an array containing days of Covid data
+   // dailyCovidData is the covid data of most recent day
+   // Uses the about-corona api
    const [dailyCovidDataList, setDailyCovidDataList] = useState([]);
    const [dailyCovidData, setDailyCovidData] = useState();
 
@@ -42,14 +43,24 @@ export default function PortfolioContainer() {
    // and sets the intial Covid data for the cards and chart
    useEffect(() => {
       const loadAPI = async () => {
+         // mathdroid's Corona api
          const APIData = await fetchData();
          console.log(APIData);
          setCovidData(APIData);
 
+         // array of about-corona's api 
          const globalDaily = await fetchGlobalData();
+
+         // Sets today's recent Covid Data which is the 
+         // first element in the array  
          setDailyCovidData(globalDaily[0].confirmed);
-         setDailyCovidDataList(globalDaily);
-         console.log(globalDaily);
+
+         // Reverses the array so the last element 
+         // is the most recent day
+         // setDailyCovidDataList(globalDaily);
+         const reverse_globalDaily = globalDaily.reverse();
+         setDailyCovidDataList(reverse_globalDaily);
+         console.log(reverse_globalDaily);
       };
 
       loadAPI();
@@ -74,14 +85,16 @@ export default function PortfolioContainer() {
    const key = '7f58ed63d7854545d442c43cba9d26af';
    let url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=${key}`;
 
+   // Searches OpenWeatherMap, calls other functions
+   // which get or set data with the country of inputted city
    const searchLocation = (event) => {
       if (event.key === 'Enter') {
          axios.get(url).then((response) => {
-            // sets OpenWeatherMap data
+            // Sets OpenWeatherMap data
             setData(response.data);
             console.log(response.data);
 
-            // sets Latitude and Longitude for maps
+            // Sets Latitude and Longitude for maps
             setLat(response.data.coord.lat);
             setLon(response.data.coord.lon);
 
@@ -90,6 +103,7 @@ export default function PortfolioContainer() {
             setCountry(response.data.sys.country);
             getAndSetCountryData(response.data.sys.country);
 
+            // Sets the country's daily confirmed covid cases and deaths
             getCountryDailyCovidData(response.data.sys.country)
          });
          // Resets the search text to ''
@@ -105,9 +119,11 @@ export default function PortfolioContainer() {
    const getCountryDailyCovidData = async (country) => {
       const daily_data = await fetchNewConfirmed(country)
       // console.log(daily_data)
-      setDailyCovidDataList(daily_data)
       setDailyCovidData(daily_data[0].confirmed)
-      console.log(daily_data[0].confirmed)
+
+
+      const reverse_globalDaily = daily_data.reverse();
+      setDailyCovidDataList(reverse_globalDaily);
     }
 
    return (
