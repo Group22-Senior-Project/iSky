@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { fetchDailyData } from "../../api";
-import { Line, Bar } from "react-chartjs-2";
+import React from "react";
+import { Line} from "react-chartjs-2";
 import 'chart.js/auto';
 import styles from "./Chart.module.css";
 
@@ -8,17 +7,7 @@ const Chart = (props) => {
 
   let lineChart;
 
-  // const [dailyData, setDailyData] = useState([]);
-  // const [data, setData] = useState(props.data);
-
   const data = props.data
-
-  // useEffect(() => {
-  //   const fetchAPI = async () => {
-  //     setDailyData(await fetchDailyData());
-  //   };
-  //   fetchAPI();
-  // }, []);
 
   if(data) {
   lineChart = data.length ? (

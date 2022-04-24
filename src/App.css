@@ -18,4 +18,6 @@
    --toast-shadow: #9c9c9ce3;
    --toast-success: #0cbfae;
    --loader-color: #0cbfae;
+   /* Hides the horizontal scroll bar in the overall page */
+   /* overflow-x: hidden; */
 }

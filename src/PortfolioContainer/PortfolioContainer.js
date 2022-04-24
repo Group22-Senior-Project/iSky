@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { TOTAL_SCREENS } from '../utilities/commonUtils';
 import axios from 'axios';
 
-import { fetchData, fetchNewConfirmed, fetchGlobalData  } from '../api';
+import { fetchData, fetchNewConfirmed, fetchGlobalData, getPlacesData  } from '../api';
 
 import Cards from './Corona/Cards.jsx';
 import Chart from './Corona/Chart.jsx';
+import List from './List/List.jsx';
 
 import './PortfolioContainer.css';
 
@@ -37,7 +38,23 @@ export default function PortfolioContainer() {
    const [dailyCovidDataList, setDailyCovidDataList] = useState([]);
    const [dailyCovidData, setDailyCovidData] = useState();
 
+   // Sets variables and the update functions
+   // for longitude and latitude
+   // default variables are within useState parentheses
+   const [lat, setLat] = useState(37.3382);
+   const [lon, setLon] = useState(-121.8863);
+
+
+   // Sets variables for places of interest
+   // is an array of places
+   const [places, setPlaces] = useState([]);
+
+
+   // Sets variables for filters of places  
+   const [placeType, setPlaceType] = useState('restaurants');
+
    // This function loads the first thing the page loads
+   // (since array in the bottom of function is empty)
    // creates a asynchornous function which
    // calls the fetchData() function from index.js
    // and sets the intial Covid data for the cards and chart
@@ -45,7 +62,7 @@ export default function PortfolioContainer() {
       const loadAPI = async () => {
          // mathdroid's Corona api
          const APIData = await fetchData();
-         console.log(APIData);
+         // console.log(APIData);
          setCovidData(APIData);
 
          // array of about-corona's api 
@@ -60,11 +77,28 @@ export default function PortfolioContainer() {
          // setDailyCovidDataList(globalDaily);
          const reverse_globalDaily = globalDaily.reverse();
          setDailyCovidDataList(reverse_globalDaily);
-         console.log(reverse_globalDaily);
+         // console.log(reverse_globalDaily);
+
+         const placesData = await getPlacesData(placeType, lat, lon);
+         // console.log(placesData);
+         // Filter array to remove ads
+         const filtPD = placesData.filter((place) => place.name && place.num_reviews > 0)
+         setPlaces(filtPD);
+         console.log(filtPD);
       };
 
       loadAPI();
    }, []);
+
+   
+   // Function runs whenever placeType changes
+   useEffect(() => {
+      getPlacesData(placeType, lat , lon)
+      .then((data) => {
+        setPlaces(data.filter((place) => place.name && place.num_reviews > 0));
+        console.log(data.filter((place) => place.name && place.num_reviews > 0))
+      });
+   }, [placeType]);
 
    // Fetches and sets the covid data of a country 
    // using mathdroid's covid api
@@ -73,12 +107,6 @@ export default function PortfolioContainer() {
       console.log(gd);
       setCovidData(gd);
    };
-
-   // Sets variables and the update functions
-   // for longitude and latitude
-   // default variables are within useState parentheses
-   const [lat, setLat] = useState(37.3382);
-   const [lon, setLon] = useState(-121.8863);
 
    // OpenWeatherMap API Key by city name
    // api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
@@ -98,13 +126,17 @@ export default function PortfolioContainer() {
             setLat(response.data.coord.lat);
             setLon(response.data.coord.lon);
 
-            // sets the country and country covid data for
+            // Sets the country and country covid data for
             // covid cards and chart
             setCountry(response.data.sys.country);
             getAndSetCountryData(response.data.sys.country);
 
             // Sets the country's daily confirmed covid cases and deaths
             getCountryDailyCovidData(response.data.sys.country)
+
+            // Calls the get places function with updated 
+            // coordinates
+            getNewPlaces("restaurants", response.data.coord.lat, response.data.coord.lon)
          });
          // Resets the search text to ''
          setLocation('');
@@ -126,8 +158,14 @@ export default function PortfolioContainer() {
       setDailyCovidDataList(reverse_globalDaily);
     }
 
+   const getNewPlaces = async (type, lat, lon) => {
+      const placesData = await getPlacesData(type, lat, lon);
+         console.log(placesData);
+         setPlaces(placesData);
+    }
+
    return (
-      <div>
+      <div className='app'>
          <Home.component
             screenName={Home.screen_name}
             key={Home.screen_name}
@@ -150,6 +188,11 @@ export default function PortfolioContainer() {
             id={Map.screen_name}
             lat={lat}
             lon={lon}
+         />
+         <List 
+            places={places}
+            placeType={placeType}
+            setPlaceType={setPlaceType}
          />
          <Weather.component
             screenName={Weather.screen_name}

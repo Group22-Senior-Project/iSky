@@ -1,17 +1,15 @@
 import ScreenHeading from '../../utilities/ScreenHeading/ScreenHeading';
-import ScrollService from '../../utilities/ScrollService';
 import Animations from '../../utilities/Animations';
 import './Maps.css';
-import { React, useState } from 'react'
+import { React } from 'react'
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
-// import { useState } from 'react/cjs/react.production.min';
 
 export default function Maps(props) {
    // Scrolling Animation
-   let fadeInScreenHandler = (screen) => {
-      if (screen.fadeInScreen !== props.id) return;
-      Animations.animations.fadeInScreen(props.id);
-   };
+   // let fadeInScreenHandler = (screen) => {
+   //    if (screen.fadeInScreen !== props.id) return;
+   //    Animations.animations.fadeInScreen(props.id);
+   // };
 
    // const fadeInSubscription =
       // ScrollService.currentScreenFadeIn.subscribe(fadeInScreenHandler);
@@ -20,7 +18,7 @@ export default function Maps(props) {
       lat: props.lat,
       lng: props.lon
    };
-   // console.log(coord);
+   // console.log({ coord });
    
    const containerStyle = {
       width: '100%',
@@ -46,6 +44,11 @@ export default function Maps(props) {
                mapContainerStyle={containerStyle}
                zoom={14}
                center={coord}
+               onChange={() => {
+                  console.log("hello");
+               }}
+               // onBoundsChanged={(e) => {
+               //    console.log(getExtendedBounds());
             />
             { /* Child components, such as markers, info windows, etc. */ }
             </div>

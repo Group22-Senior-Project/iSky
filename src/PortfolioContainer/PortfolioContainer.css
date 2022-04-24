@@ -11,3 +11,10 @@
 .search ::placeholder {
    color: gray;
 }
+
+/* Prevents horizontal scrolling in main page */
+.app {
+   max-width: 100%;
+   overflow-x: hidden;
+
+}
