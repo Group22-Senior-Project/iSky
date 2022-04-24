@@ -4,6 +4,7 @@
    height: 149px;
    color: var(--white);
 }
+
 .header-parent {
    display: flex;
    align-items: center;
