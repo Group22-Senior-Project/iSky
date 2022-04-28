@@ -11,7 +11,7 @@ import {
 
 import Cards from './Corona/Cards.jsx';
 import Chart from './Corona/Chart.jsx';
-import List from './List/List.jsx';
+import List from './Interest/List/List.jsx';
 
 import './WebsiteContainer.css';
 
