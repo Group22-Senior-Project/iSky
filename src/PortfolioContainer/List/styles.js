@@ -22,9 +22,10 @@ export default makeStyles((theme) => ({
       alignItems: 'center',
    },
    container: {
-      padding: '25px',
-      maxHeight: '500px',
-      maxWidth: '800px',
+      padding: '25px 75px 0px',
+      // maxHeight: '500px',
+      maxHeight: 'fit-content',
+      // maxWidth: '800px',
       textAlign: 'center',
       margin: '0 auto',
       // justifyContent: 'center',
@@ -32,10 +33,12 @@ export default makeStyles((theme) => ({
    marginBottom: {
       marginBottom: '60px',
    },
+   // Div of locations of interest cards
    list: {
-      height: '400px',
-      overflow: 'auto',
-      // overflowY: 'hidden',
-      // overflowX: 'scroll',
+      // height: '575px',
+      height: 'auto',
+      // To enable horizontal scrolling 
+      overflowX: 'scroll',
+      
    },
 }));

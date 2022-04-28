@@ -160,8 +160,8 @@ export default function PortfolioContainer() {
 
    const getNewPlaces = async (type, lat, lon) => {
       const placesData = await getPlacesData(type, lat, lon);
-         console.log(placesData);
-         setPlaces(placesData);
+      const filtPD = placesData.filter((place) => place.name && place.num_reviews > 0)
+      setPlaces(filtPD);
     }
 
    return (

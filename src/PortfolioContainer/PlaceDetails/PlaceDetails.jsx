@@ -22,7 +22,7 @@ const PlaceDetails = ({ place }) => {
    const classes = useStyles();
 
    return (
-      <Card elevation={6}>
+      <Card elevation={6} style={{ width: 300 }}>
          {/* Images of the place */}
          <CardMedia
             style={{ height: 150 }}
@@ -118,23 +118,28 @@ const PlaceDetails = ({ place }) => {
                </Typography>
             )}
 
-            {/* Buttons to go to external link */}
-            <CardActions>
-               <Button
-                  size="small"
-                  color="primary"
-                  onClick={() => window.open(place.web_url, '_blank')}
-               >
-                  Trip Advisor
-               </Button>
-               <Button
-                  size="small"
-                  color="primary"
-                  onClick={() => window.open(place.website, '_blank')}
-               >
-                  Website
-               </Button>
-            </CardActions>
+            {/* Buttons to go to external link 
+            If there is a url ink of a place, then add buttons to reach
+            those links*/}
+            {place.web_url ? (
+               <CardActions>
+                  <Button
+                     size="small"
+                     color="primary"
+                     onClick={() => window.open(place.web_url, '_blank')}
+                  >
+                     Trip Advisor
+                  </Button>
+                  <Button
+                     size="small"
+                     color="primary"
+                     onClick={() => window.open(place.website, '_blank')}
+                  >
+                     Website
+                  </Button>
+               </CardActions>
+            ) : (<div></div>) }
+            
          </CardContent>
       </Card>
    );
