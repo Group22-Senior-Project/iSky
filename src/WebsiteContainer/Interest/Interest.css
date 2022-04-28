@@ -1,0 +1,12 @@
+.interest-container {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   margin: 50px 75px -30px;
+}
+
+.interest-parent {
+   max-width: 1000px;
+   width: 70%;
+}
