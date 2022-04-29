@@ -2,8 +2,22 @@ import axios from "axios";
 
 const url = "https://covid19.mathdro.id/api";
 const about_corona_url = "https://corona-api.com"
+
 const t_advisor =
    'https://travel-advisor.p.rapidapi.com';
+
+const owm_key = '7f58ed63d7854545d442c43cba9d26af';
+const owm_url = `https://api.openweathermap.org/data/2.5/weather?q=`;
+
+export const getWeather = async (location) => {
+  try {
+    const weatherData = await axios.get(`${owm_url}${location}&units=imperial&appid=${owm_key}`);
+    return weatherData;
+
+  } catch (error) {
+      console.log(error);
+  };
+}
 
 // Gets country's COVID data with mathdroid's API
 export const fetchData = async (country) => {

@@ -3,6 +3,7 @@ import { TOTAL_SCREENS } from '../utilities/commonUtils';
 import axios from 'axios';
 
 import {
+   getWeather,
    fetchData,
    fetchNewConfirmed,
    fetchGlobalData,
@@ -113,42 +114,41 @@ export default function WebsiteContainer() {
       setCovidData(gd);
    };
 
-   // OpenWeatherMap API Key by city name
-   // api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
-   const key = '7f58ed63d7854545d442c43cba9d26af';
-   let url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=${key}`;
 
    // Searches OpenWeatherMap, calls other functions
    // which get or set data with the country of inputted city
-   const searchLocation = (event) => {
+   const searchLocation = async (event) => {
       if (event.key === 'Enter') {
-         axios.get(url).then((response) => {
+
+         try {
+            const weatherData = await getWeather(location);
+
             // Sets OpenWeatherMap data
-            setData(response.data);
-            console.log(response.data);
+            setData(weatherData.data);
+            console.log(weatherData.data);
 
             // Sets Latitude and Longitude for maps
-            setLat(response.data.coord.lat);
-            setLon(response.data.coord.lon);
+            setLat(weatherData.data.coord.lat);
+            setLon(weatherData.data.coord.lon);
 
             // Sets the country and country covid data for
             // covid cards and chart
-            setCountry(response.data.sys.country);
-            getAndSetCountryData(response.data.sys.country);
+            setCountry(weatherData.data.sys.country);
+            getAndSetCountryData(weatherData.data.sys.country);
 
             // Sets the country's daily confirmed covid cases and deaths
-            getCountryDailyCovidData(response.data.sys.country);
+            getCountryDailyCovidData(weatherData.data.sys.country);
 
             // Calls the get places function with updated
             // coordinates
-            getNewPlaces(
-               'restaurants',
-               response.data.coord.lat,
-               response.data.coord.lon
-            );
-         });
-         // Resets the search text to ''
-         setLocation('');
+            getNewPlaces('restaurants', weatherData.data.coord.lat, weatherData.data.coord.lon);
+
+            // Resets the search text to ''
+            setLocation('');
+         } catch (error) {
+            console.log(error)
+         };
+
       }
    };
 
