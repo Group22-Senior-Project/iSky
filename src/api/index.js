@@ -8,7 +8,7 @@ const t_advisor = "https://travel-advisor.p.rapidapi.com";
 const owm_key = "7f58ed63d7854545d442c43cba9d26af";
 const owm_url = "https://api.openweathermap.org/data/2.5/weather?q=";
 const owm_url_lat_lon = "https://api.openweathermap.org/data/2.5/weather?";
-const owm_geo_url = "http://api.openweathermap.org/geo/1.0/direct?q="; 
+const owm_geo_url = "https://api.openweathermap.org/geo/1.0/direct?q="; 
 
 // const iso = require('iso-3166-1');
 
