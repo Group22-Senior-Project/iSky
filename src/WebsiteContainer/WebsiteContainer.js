@@ -122,10 +122,10 @@ export default function WebsiteContainer() {
       if (event.key === 'Enter') {
 
          try {
-            const location_arr = location.split(/[ ,]+/);
-            console.log(location_arr);
-            // const weatherData = await getCityList(location);
-            const weatherData = await getCityList(location_arr[0], location_arr[1]);
+            // const location_arr = location.split(/[ ,]+/);
+            // console.log(location_arr);
+            const weatherData = await getCityList(location);
+            // const weatherData = await getCityList(location_arr[0], location_arr[1]);
 
             // Sets OpenWeatherMap data
             setData(weatherData.data);
