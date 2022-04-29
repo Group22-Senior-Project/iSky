@@ -8,6 +8,7 @@ import {
    fetchNewConfirmed,
    fetchGlobalData,
    getPlacesData,
+   getCityList,
 } from '../api';
 
 import Cards from './Corona/Cards.jsx';
@@ -121,7 +122,10 @@ export default function WebsiteContainer() {
       if (event.key === 'Enter') {
 
          try {
-            const weatherData = await getWeather(location);
+            const location_arr = location.split(/[ ,]+/);
+            console.log(location_arr);
+            // const weatherData = await getCityList(location);
+            const weatherData = await getCityList(location_arr[0], location_arr[1]);
 
             // Sets OpenWeatherMap data
             setData(weatherData.data);
