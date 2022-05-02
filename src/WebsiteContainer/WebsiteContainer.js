@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { TOTAL_SCREENS } from '../utilities/commonUtils';
-import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
 
 import {
+   getWeather,
    fetchData,
    fetchNewConfirmed,
    fetchGlobalData,
    getPlacesData,
+   getCityList,
 } from '../api';
 
 import Cards from './Corona/Cards.jsx';
@@ -14,6 +16,8 @@ import Chart from './Corona/Chart.jsx';
 import List from './Interest/List/List.jsx';
 
 import './WebsiteContainer.css';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function WebsiteContainer() {
    // Sets a const for every component from
@@ -89,7 +93,7 @@ export default function WebsiteContainer() {
             (place) => place.name && place.num_reviews > 0
          );
          setPlaces(filtPD);
-         console.log(filtPD);
+         // console.log(filtPD);
       };
 
       loadAPI();
@@ -99,9 +103,7 @@ export default function WebsiteContainer() {
    useEffect(() => {
       getPlacesData(placeType, lat, lon).then((data) => {
          setPlaces(data.filter((place) => place.name && place.num_reviews > 0));
-         console.log(
-            data.filter((place) => place.name && place.num_reviews > 0)
-         );
+         // console.log(data.filter((place) => place.name && place.num_reviews > 0));
       });
    }, [placeType]);
 
@@ -109,46 +111,57 @@ export default function WebsiteContainer() {
    // using mathdroid's covid api
    const getAndSetCountryData = async (country) => {
       const gd = await fetchData(country);
-      console.log(gd);
+      // console.log(gd);
       setCovidData(gd);
    };
 
-   // OpenWeatherMap API Key by city name
-   // api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
-   const key = '7f58ed63d7854545d442c43cba9d26af';
-   let url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=${key}`;
 
    // Searches OpenWeatherMap, calls other functions
    // which get or set data with the country of inputted city
-   const searchLocation = (event) => {
+   const searchLocation = async (event) => {
       if (event.key === 'Enter') {
-         axios.get(url).then((response) => {
+
+         try {
+            // const location_arr = location.split(/[ ,]+/);
+            // console.log(location_arr);
+            const weatherData = await getCityList(location);
+            // const weatherData = await getCityList(location_arr[0], location_arr[1]);
+
             // Sets OpenWeatherMap data
-            setData(response.data);
-            console.log(response.data);
+            setData(weatherData.data);
+            console.log(weatherData.data);
 
             // Sets Latitude and Longitude for maps
-            setLat(response.data.coord.lat);
-            setLon(response.data.coord.lon);
+            setLat(weatherData.data.coord.lat);
+            setLon(weatherData.data.coord.lon);
 
             // Sets the country and country covid data for
             // covid cards and chart
-            setCountry(response.data.sys.country);
-            getAndSetCountryData(response.data.sys.country);
+            setCountry(weatherData.data.sys.country);
+            getAndSetCountryData(weatherData.data.sys.country);
 
             // Sets the country's daily confirmed covid cases and deaths
-            getCountryDailyCovidData(response.data.sys.country);
+            getCountryDailyCovidData(weatherData.data.sys.country);
 
             // Calls the get places function with updated
             // coordinates
-            getNewPlaces(
-               'restaurants',
-               response.data.coord.lat,
-               response.data.coord.lon
-            );
-         });
-         // Resets the search text to ''
-         setLocation('');
+            getNewPlaces('restaurants', weatherData.data.coord.lat, weatherData.data.coord.lon);
+
+            // Resets the search text to ''
+            setLocation('');
+         } catch (error) {
+            // console.log(error)
+            toast.error("City not found. \n Please input a valid city", {
+               position: "top-center",
+               autoClose: 5000,
+               hideProgressBar: false,
+               closeOnClick: true,
+               pauseOnHover: true,
+               draggable: true,
+               progress: undefined,
+               });
+         };
+
       }
    };
 
@@ -226,6 +239,10 @@ export default function WebsiteContainer() {
             daily={dailyCovidData}
          ></Cards>
          <Chart data={dailyCovidDataList} country={country}></Chart>
+         <div className='tc'>
+           <ToastContainer></ToastContainer> 
+         </div>
+         
       </div>
    );
 }

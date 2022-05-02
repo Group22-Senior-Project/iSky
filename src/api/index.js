@@ -2,8 +2,70 @@ import axios from "axios";
 
 const url = "https://covid19.mathdro.id/api";
 const about_corona_url = "https://corona-api.com"
-const t_advisor =
-   'https://travel-advisor.p.rapidapi.com';
+
+const t_advisor = "https://travel-advisor.p.rapidapi.com";
+
+const owm_key = "7f58ed63d7854545d442c43cba9d26af";
+const owm_url = "https://api.openweathermap.org/data/2.5/weather?q=";
+const owm_url_lat_lon = "https://api.openweathermap.org/data/2.5/weather?";
+const owm_geo_url = "https://api.openweathermap.org/geo/1.0/direct?q="; 
+
+// const iso = require('iso-3166-1');
+
+
+// Uses OpenWeatherMaps' direct geocoding from location name 
+// to get an array of length 5 with locations of the same name. 
+// We take the first element's coordinates to call another function. 
+// It calls the getCityWeatherFromLatLon which gets the weather data
+// of a location by the latitude and longutide we get from geocoding by name
+export const getCityList = async (location) => {
+// export const getCityList = async (city, country) => {
+  try {
+      const cityList = await axios.get(`${owm_geo_url}${location}&limit=5&appid=${owm_key}`);
+      // const cityList = await axios.get(`${owm_geo_url}${city},${country}&limit=5&appid=${owm_key}`);
+      console.log(cityList.data);
+
+      // const alpha2 = iso.whereCountry(country).alpha2
+
+      // for (let i = 0; i < cityList.data.length; i++) {
+      //   if (cityList.data[i].state == alpha2) {
+      //     const cityData = await getCityWeatherFromLatLon(cityList.data[i].lat, cityList.data[i].lon);
+      //     return cityData
+      //   }
+      // }
+
+      const lat = cityList.data[0].lat;
+      const lon = cityList.data[0].lon;
+      const cityData = await getCityWeatherFromLatLon(lat, lon);
+      return cityData
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+// Gets a city's current weather data from latitude and longitude coordinates
+// is called from getCityList() above
+export const getCityWeatherFromLatLon = async (lat, lon) => {
+  try {
+    const cityWeatherData = await axios.get(`${owm_url_lat_lon}lat=${lat}&lon=${lon}&appid=${owm_key}&units=imperial`);
+    return cityWeatherData;
+
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// Gets a city's weather data using OpenWeatherMap API
+// takes in a string which is the city name
+export const getWeather = async (location) => {
+  try {
+    const weatherData = await axios.get(`${owm_url}${location}&units=imperial&appid=${owm_key}`);
+    return weatherData;
+
+  } catch (error) {
+      console.log(error);
+  };
+}
 
 // Gets country's COVID data with mathdroid's API
 export const fetchData = async (country) => {
@@ -119,7 +181,8 @@ export const getPlacesData = async (type, lat, lon) => {
         headers: {
            'x-rapidapi-host': 'travel-advisor.p.rapidapi.com',
            'x-rapidapi-key':
-              'ec2673bc82msh527abdac9b56892p123508jsn009f5ddbae70',
+              // 'ec2673bc82msh527abdac9b56892p123508jsn009f5ddbae70',
+              '0cc26afb2fmsh8b7f6e65e258f5ep15d7d6jsn9438b0d383a0',
         },
      });
 
