@@ -62,6 +62,10 @@ export default function Header() {
       };
    }, [currentScreenSubscription]);
 
+//    function reload() {
+//       window.location.reload();
+//   }
+
    return (
       <div
          className="header-container"
@@ -78,7 +82,9 @@ export default function Header() {
                />
             </div>
             <div className="header-logo">
-               <span>iSKY</span>
+               <span>
+               iSKY
+               </span>
             </div>
             <div
                className={
