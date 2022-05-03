@@ -1,4 +1,5 @@
 import React from 'react';
+import './Place.css';
 
 // Imports from Material UI
 import {
