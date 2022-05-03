@@ -1,7 +1,8 @@
-import Home from '../PortfolioContainer/Home/Home';
-import Maps from '../PortfolioContainer/Maps/Maps';
-import Weather from '../PortfolioContainer/Weather/Weather';
-import Corona from '../PortfolioContainer/Corona/Corona';
+import Home from '../WebsiteContainer/Home/Home';
+import Maps from '../WebsiteContainer/Maps/Maps';
+import Weather from '../WebsiteContainer/Weather/Weather';
+import Corona from '../WebsiteContainer/Corona/Corona';
+import Interest from '../WebsiteContainer/Interest/Interest';
 
 // Array to keep a list of our screens
 export const TOTAL_SCREENS = [
@@ -12,6 +13,10 @@ export const TOTAL_SCREENS = [
    {
       screen_name: 'Map',
       component: Maps,
+   },
+   {
+      screen_name: 'Interest',
+      component: Interest,
    },
    {
       screen_name: 'Weather',

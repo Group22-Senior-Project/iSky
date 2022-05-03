@@ -24,6 +24,14 @@ export default class ScrollService {
       homeScreen.scrollIntoView({ behavior: 'smooth' });
    };
 
+   // Scroll to the Interest Page
+   scrollToInterest = () => {
+      let InterestScreen = document.getElementById('Interest');
+      if (!InterestScreen) return;
+
+      InterestScreen.scrollIntoView({ behavior: 'smooth' });
+   };
+
    // Scroll to the Weather Page
    scrollToWeather = () => {
       let weatherScreen = document.getElementById('Weather');
