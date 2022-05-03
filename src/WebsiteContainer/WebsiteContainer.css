@@ -12,6 +12,13 @@
    color: gray;
 }
 
+.name {
+   text-align: center;
+   font-size: 35px;
+   padding: 20px;
+   font-weight: bold;
+}
+
 /* Prevents horizontal scrolling in main page */
 .app {
    max-width: 100%;
