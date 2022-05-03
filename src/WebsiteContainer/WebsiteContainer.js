@@ -205,6 +205,9 @@ export default function WebsiteContainer() {
             <input type="date" />
             <input type="date" />
          </div>
+         <div className='name'>
+            {data.name}
+         </div>
          <Map.component
             screenName={Map.screen_name}
             key={Map.screen_name}
