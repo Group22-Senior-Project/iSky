@@ -9,6 +9,7 @@ import {
    fetchGlobalData,
    getPlacesData,
    getCityList,
+   getHistoricalWeather,
 } from '../api';
 
 import Cards from './Corona/Cards.jsx';
@@ -17,6 +18,7 @@ import List from './Interest/List/List.jsx';
 
 import './WebsiteContainer.css';
 import 'react-toastify/dist/ReactToastify.css';
+import WeatherList from './WeatherHistorical/WeatherList/WeatherList';
 
 
 export default function WebsiteContainer() {
@@ -28,37 +30,54 @@ export default function WebsiteContainer() {
    const Weather = TOTAL_SCREENS[3];
    const Corona = TOTAL_SCREENS[4];
 
-   // OpenWeatherMap API consts
+   // -- OpenWeatherMap API consts --
    // data is the OpenWeatherMap json
    // and location is the user's input in the search bar
    const [data, setData] = useState({});
    const [location, setLocation] = useState('');
 
+
+   // -- Historical OpenWeatherMap API consts --
+   // Start date of planned trip to a location
+   const [startDate, setStartDate] = useState('');
+
+   // Start date of planned trip in unix format as it
+   // is need to call the historical data function
+   const [startDateUnix, setStartDateUnix] = useState('');
+
+   // The array of 8 days a year ago from a user's date input
+   const [historicalWeekDataArr, setHistoricalWeekDataArr] = useState([]);
+
+
+   // -- mathdroid's corona API consts --
    // Covid Data and Country
    // country is the country of the city a user selected
-   // covidData is the mathdroid corona api json
    const [country, setCountry] = useState(' ');
    const [covidData, setCovidData] = useState({});
 
+
+   // -- about-corona API consts --
    // Daily New Covid Data
-   // dailyCovidDataList is an array containing days of Covid data
+   // dailyCovidDataList is an array containing last 30 days of Covid data
    // dailyCovidData is the covid data of most recent day
-   // Uses the about-corona api
    const [dailyCovidDataList, setDailyCovidDataList] = useState([]);
    const [dailyCovidData, setDailyCovidData] = useState();
 
    // Sets variables and the update functions
    // for longitude and latitude
    // default variables are within useState parentheses
+   // and are set to San Jose's coordinates
    const [lat, setLat] = useState(37.3382);
    const [lon, setLon] = useState(-121.8863);
 
+   // -- TravelAdvisor API consts --
    // Sets variables for places of interest
    // is an array of places
    const [places, setPlaces] = useState([]);
-
+   
    // Sets variables for filters of places
    const [placeType, setPlaceType] = useState('restaurants');
+
 
    // This function loads the first thing the page loads
    // (since array in the bottom of function is empty)
@@ -87,6 +106,7 @@ export default function WebsiteContainer() {
          // console.log(reverse_globalDaily);
 
          const placesData = await getPlacesData(placeType, lat, lon);
+
          // console.log(placesData);
          // Filter array to remove ads
          const filtPD = placesData.filter(
@@ -149,6 +169,11 @@ export default function WebsiteContainer() {
 
             // Resets the search text to ''
             setLocation('');
+
+            // Calls the historicalWeatherCaller function in this js file 
+            // to have error handling
+            historicalWeatherCaller(weatherData.data.coord.lat, weatherData.data.coord.lon, startDateUnix);
+
          } catch (error) {
             // console.log(error)
             toast.error("City not found. \n Please input a valid city", {
@@ -165,6 +190,44 @@ export default function WebsiteContainer() {
       }
    };
 
+   // Sets the start date to the selected value
+   // Also converts the date to unix format
+   const handleStartDateChange = (event) => {
+      setStartDate(event);
+      console.log(event);
+
+      // Convert date to unix format
+      const dateStr = new Date(event);
+      const unixTime = Math.floor(dateStr.getTime() / 1000);
+      setStartDateUnix(unixTime);
+      console.log(unixTime);
+   };
+
+   // Calls getHistoricalWeather() function in index.js with error handling
+   const historicalWeatherCaller = async (lat, lon, startDateUnix) => {
+      try {
+         const historicalData = await getHistoricalWeather(lat, lon, startDateUnix);
+         setHistoricalWeekDataArr(historicalData);
+         // console.log(historicalWeekDataArr);
+
+         // error handling since catching does not work for some reason
+         if (typeof historicalData == 'undefined') {
+            toast.error("Please input a future date", {
+               position: "top-center",
+               autoClose: 5000,
+               hideProgressBar: false,
+               closeOnClick: true,
+               pauseOnHover: true,
+               draggable: true,
+               progress: undefined,
+               });
+         }
+
+      } catch (error) {
+         console.log(error);
+      }
+   };
+   
    // Gets a country's daily covid data array
    // and the current daily covid cases.
    // It sets the const DailyCovidDataList to the array.
@@ -202,11 +265,20 @@ export default function WebsiteContainer() {
                onKeyPress={searchLocation}
                placeholder="City, State/Country"
             />
-            <input type="date" />
-            <input type="date" />
+            <input 
+               type="date"
+               value={startDate}
+               onChange={(event) => handleStartDateChange(event.target.value)}
+            />
          </div>
-         <div className='name'>
-            {data.name}
+         {/* Conditional rendering for ity name and ity Country 
+             if there is a city name, render city name and city country*/}
+         <div className='city-name'>
+            { data.name ? (
+               <div>
+                {data.name}, {data.sys.country}
+               </div>
+            ) : (<div></div>)} 
          </div>
          <Map.component
             screenName={Map.screen_name}
@@ -231,6 +303,10 @@ export default function WebsiteContainer() {
             id={Weather.screen_name}
             data={data}
          />
+         <WeatherList
+            historicalWeekDataArr={historicalWeekDataArr}
+         />
+
          <Corona.component
             screenName={Corona.screen_name}
             key={Corona.screen_name}
