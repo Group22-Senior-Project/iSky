@@ -10,6 +10,9 @@ const owm_url = "https://api.openweathermap.org/data/2.5/weather?q=";
 const owm_url_lat_lon = "https://api.openweathermap.org/data/2.5/weather?";
 const owm_geo_url = "https://api.openweathermap.org/geo/1.0/direct?q="; 
 
+const owm_historical_key = "709d47814af78d6c97617012fc48b235";
+const owm_historical_url = "https://history.openweathermap.org/data/2.5/history/city?";
+
 // const iso = require('iso-3166-1');
 
 
@@ -57,6 +60,7 @@ export const getCityWeatherFromLatLon = async (lat, lon) => {
 
 // Gets a city's weather data using OpenWeatherMap API
 // takes in a string which is the city name
+// we stopped using this method
 export const getWeather = async (location) => {
   try {
     const weatherData = await axios.get(`${owm_url}${location}&units=imperial&appid=${owm_key}`);
@@ -65,6 +69,34 @@ export const getWeather = async (location) => {
   } catch (error) {
       console.log(error);
   };
+}
+
+
+export const getHistoricalWeather = async (lat, lon, startTime) => {
+  try {
+    // Last year is unix time minus 31,536,000 seconds
+    const lastYearStartTime = startTime - 31536000;
+    // Time after a week which is time plus 604,800 seconds
+    const lastYearEndTime = lastYearStartTime + 604800
+
+    const weatherData = await axios.get(`${owm_historical_url}&lat=${lat}&lon=${lon}&type=hour&start=${lastYearStartTime}&end=${lastYearEndTime}&appid=${owm_historical_key}&units=imperial`);
+    console.log(weatherData)
+
+    const weatherDataList = weatherData.data.list;
+    const sevenDayArray = [];
+
+    // should be 169 total entries for each hour of a week 
+    // incrementing by 24 is getting different days since the json contains every hour
+    for (let i = 0; i < weatherData.data.list.length; i += 24) {
+      sevenDayArray.push(weatherDataList[i]);
+    }
+    // console.log(sevenDayArray)
+
+    return sevenDayArray;
+
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 // Gets country's COVID data with mathdroid's API
