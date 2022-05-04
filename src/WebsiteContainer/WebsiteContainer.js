@@ -205,8 +205,14 @@ export default function WebsiteContainer() {
             <input type="date" />
             <input type="date" />
          </div>
-         <div className='name'>
-            {data.name}
+         {/* Conditional rendering for ity name and ity Country 
+             if there is a city name, render city name and city country*/}
+         <div>
+            { data.name ? (
+               <div className='name'>
+                {data.name}, {data.sys.country}
+               </div>
+            ) : (<div></div>)} 
          </div>
          <Map.component
             screenName={Map.screen_name}
