@@ -207,9 +207,9 @@ export default function WebsiteContainer() {
          </div>
          {/* Conditional rendering for ity name and ity Country 
              if there is a city name, render city name and city country*/}
-         <div>
+         <div className='city-name'>
             { data.name ? (
-               <div className='name'>
+               <div>
                 {data.name}, {data.sys.country}
                </div>
             ) : (<div></div>)} 
