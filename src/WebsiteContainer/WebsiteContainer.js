@@ -269,6 +269,7 @@ export default function WebsiteContainer() {
                type="date"
                value={startDate}
                onChange={(event) => handleStartDateChange(event.target.value)}
+               onKeyPress={searchLocation}
             />
          </div>
          {/* Conditional rendering for ity name and ity Country 

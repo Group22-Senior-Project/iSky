@@ -75,7 +75,9 @@ export const getWeather = async (location) => {
 export const getHistoricalWeather = async (lat, lon, startTime) => {
   try {
     // Last year is unix time minus 31,536,000 seconds
-    const lastYearStartTime = startTime - 31536000;
+    // const lastYearStartTime = startTime - 31536000; 
+    const lastYearStartTime = startTime - 31449600; 
+    
     // Time after a week which is time plus 604,800 seconds
     const lastYearEndTime = lastYearStartTime + 604800
 
