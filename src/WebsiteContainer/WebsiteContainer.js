@@ -20,7 +20,6 @@ import './WebsiteContainer.css';
 import 'react-toastify/dist/ReactToastify.css';
 import WeatherList from './WeatherHistorical/WeatherList/WeatherList';
 
-
 export default function WebsiteContainer() {
    // Sets a const for every component from
    // the component array in commonUtils.js
@@ -36,7 +35,6 @@ export default function WebsiteContainer() {
    const [data, setData] = useState({});
    const [location, setLocation] = useState('');
 
-
    // -- Historical OpenWeatherMap API consts --
    // Start date of planned trip to a location
    const [startDate, setStartDate] = useState('');
@@ -48,13 +46,11 @@ export default function WebsiteContainer() {
    // The array of 8 days a year ago from a user's date input
    const [historicalWeekDataArr, setHistoricalWeekDataArr] = useState([]);
 
-
    // -- mathdroid's corona API consts --
    // Covid Data and Country
    // country is the country of the city a user selected
    const [country, setCountry] = useState(' ');
    const [covidData, setCovidData] = useState({});
-
 
    // -- about-corona API consts --
    // Daily New Covid Data
@@ -74,10 +70,9 @@ export default function WebsiteContainer() {
    // Sets variables for places of interest
    // is an array of places
    const [places, setPlaces] = useState([]);
-   
+
    // Sets variables for filters of places
    const [placeType, setPlaceType] = useState('restaurants');
-
 
    // This function loads the first thing the page loads
    // (since array in the bottom of function is empty)
@@ -135,12 +130,10 @@ export default function WebsiteContainer() {
       setCovidData(gd);
    };
 
-
    // Searches OpenWeatherMap, calls other functions
    // which get or set data with the country of inputted city
    const searchLocation = async (event) => {
       if (event.key === 'Enter') {
-
          try {
             // const location_arr = location.split(/[ ,]+/);
             // console.log(location_arr);
@@ -165,28 +158,34 @@ export default function WebsiteContainer() {
 
             // Calls the get places function with updated
             // coordinates
-            getNewPlaces('restaurants', weatherData.data.coord.lat, weatherData.data.coord.lon);
+            getNewPlaces(
+               'restaurants',
+               weatherData.data.coord.lat,
+               weatherData.data.coord.lon
+            );
 
             // Resets the search text to ''
             setLocation('');
 
-            // Calls the historicalWeatherCaller function in this js file 
+            // Calls the historicalWeatherCaller function in this js file
             // to have error handling
-            historicalWeatherCaller(weatherData.data.coord.lat, weatherData.data.coord.lon, startDateUnix);
-
+            historicalWeatherCaller(
+               weatherData.data.coord.lat,
+               weatherData.data.coord.lon,
+               startDateUnix
+            );
          } catch (error) {
             // console.log(error)
-            toast.error("City not found. \n Please input a valid city", {
-               position: "top-center",
+            toast.error('City not found. \n Please input a valid city', {
+               position: 'top-center',
                autoClose: 5000,
                hideProgressBar: false,
                closeOnClick: true,
                pauseOnHover: true,
                draggable: true,
                progress: undefined,
-               });
-         };
-
+            });
+         }
       }
    };
 
@@ -206,28 +205,31 @@ export default function WebsiteContainer() {
    // Calls getHistoricalWeather() function in index.js with error handling
    const historicalWeatherCaller = async (lat, lon, startDateUnix) => {
       try {
-         const historicalData = await getHistoricalWeather(lat, lon, startDateUnix);
+         const historicalData = await getHistoricalWeather(
+            lat,
+            lon,
+            startDateUnix
+         );
          setHistoricalWeekDataArr(historicalData);
          // console.log(historicalWeekDataArr);
 
          // error handling since catching does not work for some reason
          if (typeof historicalData == 'undefined') {
-            toast.error("Please input a future date", {
-               position: "top-center",
+            toast.error('Please input a future date', {
+               position: 'top-center',
                autoClose: 5000,
                hideProgressBar: false,
                closeOnClick: true,
                pauseOnHover: true,
                draggable: true,
                progress: undefined,
-               });
+            });
          }
-
       } catch (error) {
          console.log(error);
       }
    };
-   
+
    // Gets a country's daily covid data array
    // and the current daily covid cases.
    // It sets the const DailyCovidDataList to the array.
@@ -260,26 +262,29 @@ export default function WebsiteContainer() {
 
          <div className="search">
             <div className="location">
-            <label>Enter Location:</label> <br />
-            <input
-               type="text"
-               value={location}
-               onChange={(event) => setLocation(event.target.value)}
-               onKeyPress={searchLocation}
-               placeholder="City, State/Country"
-            />
-            </div>
-            <div className="start">
-            <label id='date'>Enter Start Date:</label> <br />
-            <input 
-               type="date"
-               value={startDate}
-               onChange={(event) => handleStartDateChange(event.target.value)}
-               onKeyPress={searchLocation}
-            />
+               <label>Enter Location:</label> <br />
+               <input
+                  type="text"
+                  value={location}
+                  onChange={(event) => setLocation(event.target.value)}
+                  onKeyPress={searchLocation}
+                  placeholder="City, State/Country"
+               />
             </div>
 
+            <div className="start">
+               <label id="date">Enter Start Date:</label> <br />
+               <input
+                  type="date"
+                  value={startDate}
+                  onChange={(event) =>
+                     handleStartDateChange(event.target.value)
+                  }
+                  onKeyPress={searchLocation}
+               />
+            </div>
          </div>
+
          {/* <div className="labels">
             <label id='location'>Enter Location:</label>
             <label id='date'>Enter Start Date:</label>
@@ -302,12 +307,14 @@ export default function WebsiteContainer() {
          </div> */}
          {/* Conditional rendering for ity name and ity Country 
              if there is a city name, render city name and city country*/}
-         <div className='city-name'>
-            { data.name ? (
+         <div className="city-name">
+            {data.name ? (
                <div>
-                {data.name}, {data.sys.country}
+                  {data.name}, {data.sys.country}
                </div>
-            ) : (<div></div>)} 
+            ) : (
+               <div></div>
+            )}
          </div>
          <Map.component
             screenName={Map.screen_name}
@@ -332,9 +339,7 @@ export default function WebsiteContainer() {
             id={Weather.screen_name}
             data={data}
          />
-         <WeatherList
-            historicalWeekDataArr={historicalWeekDataArr}
-         />
+         <WeatherList historicalWeekDataArr={historicalWeekDataArr} />
 
          <Corona.component
             screenName={Corona.screen_name}
@@ -347,10 +352,9 @@ export default function WebsiteContainer() {
             daily={dailyCovidData}
          ></Cards>
          <Chart data={dailyCovidDataList} country={country}></Chart>
-         <div className='tc'>
-           <ToastContainer></ToastContainer> 
+         <div className="tc">
+            <ToastContainer></ToastContainer>
          </div>
-         
       </div>
    );
 }
