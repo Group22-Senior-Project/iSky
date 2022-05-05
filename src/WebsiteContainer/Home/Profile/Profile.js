@@ -66,7 +66,7 @@ export default function Profile() {
                         ScrollService.scrollHandler.scrollToCorona()
                      }
                   >
-                     COVID
+                     COVID-19
                   </button>
                </div>
                {/* Buttons */}

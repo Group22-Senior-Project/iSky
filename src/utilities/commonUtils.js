@@ -23,7 +23,7 @@ export const TOTAL_SCREENS = [
       component: Weather,
    },
    {
-      screen_name: 'Corona',
+      screen_name: 'COVID-19',
       component: Corona,
    },
 ];

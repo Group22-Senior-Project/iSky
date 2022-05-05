@@ -42,7 +42,7 @@ export default class ScrollService {
 
    // Scroll to the Corona Page
    scrollToCorona = () => {
-      let coronaScreen = document.getElementById('Corona');
+      let coronaScreen = document.getElementById('COVID-19');
       if (!coronaScreen) return;
 
       coronaScreen.scrollIntoView({ behavior: 'smooth' });
