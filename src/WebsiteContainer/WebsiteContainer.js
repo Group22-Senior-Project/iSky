@@ -257,7 +257,35 @@ export default function WebsiteContainer() {
             key={Home.screen_name}
             id={Home.screen_name}
          />
+
          <div className="search">
+            <div className="location">
+            <label>Enter Location:</label> <br />
+            <input
+               type="text"
+               value={location}
+               onChange={(event) => setLocation(event.target.value)}
+               onKeyPress={searchLocation}
+               placeholder="City, State/Country"
+            />
+            </div>
+            <div className="start">
+            <label id='date'>Enter Start Date:</label> <br />
+            <input 
+               type="date"
+               value={startDate}
+               onChange={(event) => handleStartDateChange(event.target.value)}
+               onKeyPress={searchLocation}
+            />
+            </div>
+
+         </div>
+         {/* <div className="labels">
+            <label id='location'>Enter Location:</label>
+            <label id='date'>Enter Start Date:</label>
+         </div> */}
+
+         {/* <div className="search">
             <input
                type="text"
                value={location}
@@ -271,7 +299,7 @@ export default function WebsiteContainer() {
                onChange={(event) => handleStartDateChange(event.target.value)}
                onKeyPress={searchLocation}
             />
-         </div>
+         </div> */}
          {/* Conditional rendering for ity name and ity Country 
              if there is a city name, render city name and city country*/}
          <div className='city-name'>
