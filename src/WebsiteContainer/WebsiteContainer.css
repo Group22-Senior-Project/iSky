@@ -1,11 +1,19 @@
 .search {
-   width: 50%;
+   position: relative;
+   left: 40%;
    margin: 0 auto;
    text-align: center;
+   display: flex;
+   font-size: small;
+   /* width: 50px; */
+   border-spacing: 200px;
 }
+
+
 
 .search input {
    margin: 0 auto;
+   padding-left: 10px;
 }
 
 .search ::placeholder {
