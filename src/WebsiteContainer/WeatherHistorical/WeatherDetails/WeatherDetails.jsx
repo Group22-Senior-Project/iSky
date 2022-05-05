@@ -16,7 +16,7 @@ const WeatherDetails = ({ historicalWeekDataArr }) => {
    // then converts it to MM - DD - YYYY format
    const time = historicalWeekDataArr.dt * 1000;
    const timeString = new Date(time);
-   const monthDayYear = (timeString.getMonth() + 1) + ' - ' + timeString.getDate() + ' - ' + timeString.getFullYear();
+   const monthDayYear = (timeString.getMonth() + 1) + ' - ' + timeString.getDate() + ' - ' + (timeString.getFullYear() + 1) ;
    // console.log(monthDayYear);
 
    // Rounds the temperature 
