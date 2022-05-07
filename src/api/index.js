@@ -217,7 +217,7 @@ export const getPlacesData = async (type, lat, lon) => {
            'x-rapidapi-key':
               // 'ec2673bc82msh527abdac9b56892p123508jsn009f5ddbae70',
               // '0cc26afb2fmsh8b7f6e65e258f5ep15d7d6jsn9438b0d383a0',
-              'd756618f9dmsh39e40ef018c3f10p1a456cjsnb7f4bfdfa360'
+              'd756618f9dmsh39e40ef018c3f10p1a456cjsnb7f4bfdfa360',
         },
      });
 
