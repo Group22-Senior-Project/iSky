@@ -22,6 +22,10 @@ const WeatherDetails = ({ historicalWeekDataArr }) => {
    // Rounds the temperature 
    const tempRounded = Math.round(historicalWeekDataArr.main.temp);
 
+   // Makes first letter of weather description uppercase
+   const description = historicalWeekDataArr.weather[0].description;
+   const descriptionUpper = description.charAt(0).toUpperCase() + description.slice(1);
+
    return (
       <Card elevation={6} style={{ width: 200 }}>
 
@@ -29,6 +33,9 @@ const WeatherDetails = ({ historicalWeekDataArr }) => {
          <CardContent>
             <Typography gutterBottom variant="h5">
                {monthDayYear}
+            </Typography>
+            <Typography gutterBottom variant="h6">
+               {descriptionUpper}
             </Typography>
             <Typography gutterBottom variant="h5">
                {tempRounded}ºF
