@@ -104,10 +104,12 @@ export default function WebsiteContainer() {
 
          // console.log(placesData);
          // Filter array to remove ads
-         const filtPD = placesData.filter(
-            (place) => place.name && place.num_reviews > 0
-         );
-         setPlaces(filtPD);
+         try {
+            const filtPD = placesData.filter((place) => place.name && place.num_reviews > 0);
+            setPlaces(filtPD);
+         } catch (error) {
+            console.log(error)
+         }
          // console.log(filtPD);
       };
 
@@ -116,10 +118,16 @@ export default function WebsiteContainer() {
 
    // Function runs whenever placeType changes
    useEffect(() => {
-      getPlacesData(placeType, lat, lon).then((data) => {
-         setPlaces(data.filter((place) => place.name && place.num_reviews > 0));
-         // console.log(data.filter((place) => place.name && place.num_reviews > 0));
-      });
+      const loadFiltered = async () => {
+         try {
+            const gpd = await getPlacesData(placeType, lat, lon);
+            const filtered = gpd.filter((place) => place.name && place.num_reviews > 0);
+            setPlaces(filtered)
+         } catch (error) {
+            console.log(error)
+         }
+      }
+      loadFiltered();
    }, [placeType]);
 
    // Fetches and sets the covid data of a country
@@ -245,11 +253,13 @@ export default function WebsiteContainer() {
    };
 
    const getNewPlaces = async (type, lat, lon) => {
-      const placesData = await getPlacesData(type, lat, lon);
-      const filtPD = placesData.filter(
-         (place) => place.name && place.num_reviews > 0
-      );
-      setPlaces(filtPD);
+      try {
+         const placesData = await getPlacesData(type, lat, lon);
+         const filtPD = placesData.filter((place) => place.name && place.num_reviews > 0);
+         setPlaces(filtPD);
+      } catch (error) {
+         console.log(error);
+      }
    };
 
    return (
