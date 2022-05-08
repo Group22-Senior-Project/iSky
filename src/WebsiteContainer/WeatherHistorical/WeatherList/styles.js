@@ -36,7 +36,7 @@ export default makeStyles((theme) => ({
    // Div of locations of interest cards
    list: {
       // height: '575px',
-      height: 'auto',
+      height: '180px',
       // To enable horizontal scrolling 
       overflowX: 'scroll',
       
