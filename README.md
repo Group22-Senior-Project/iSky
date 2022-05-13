@@ -21,4 +21,4 @@ HTML, CSS, JavaScript, React.js, Node.js
       - react-Google-Maps
       - about-corona
       - mathdroid's covid-19 api
-      - Tripadvisor 
+      - Trvael Advisor 
