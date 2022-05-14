@@ -2,7 +2,7 @@
 
 # Deployment Link: [iSky](https://isky.netlify.app/)
 
-### iSky is a vacation planner developed by Anvay Bhanap, Jonathan Lu, Isaac McDonald, and Richard Tran to help people to travel their vacation in a pandemic, recovering world.
+#### iSky is a vacation planner developed by Anvay Bhanap, Jonathan Lu, Isaac McDonald, and Richard Tran to help people to travel their vacation in a pandemic, recovering world.
 
 # To run our application locally
 
@@ -17,8 +17,8 @@ HTML, CSS, JavaScript, React.js, Node.js
 
 # API Used:
 
-      - OpenWeatherMap      
-      - react-Google-Maps
-      - about-corona
-      - mathdroid's covid-19 api
-      - Trvael Advisor 
+- [OpenWeatherMap](https://openweathermap.org/)
+- [react-Google-Maps](https://tomchentw.github.io/react-google-maps/)
+- [about-corona](https://about-corona.net/)
+- [mathdroid's covid-19 api](https://github.com/mathdroid/covid-19-api)
+- [Travel Advisor](https://rapidapi.com/apidojo/api/travel-advisor/)
