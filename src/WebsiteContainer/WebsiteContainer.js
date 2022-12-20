@@ -12,7 +12,7 @@ import {
    getHistoricalWeather,
 } from '../api';
 
-import Cards from './Corona/Cards.jsx';
+// import Cards from './Corona/Cards.jsx';
 import Chart from './Corona/Chart.jsx';
 import List from './Interest/List/List.jsx';
 
@@ -50,14 +50,14 @@ export default function WebsiteContainer() {
    // Covid Data and Country
    // country is the country of the city a user selected
    const [country, setCountry] = useState(' ');
-   const [covidData, setCovidData] = useState({});
+   // const [covidData, setCovidData] = useState({});
 
    // -- about-corona API consts --
    // Daily New Covid Data
    // dailyCovidDataList is an array containing last 30 days of Covid data
    // dailyCovidData is the covid data of most recent day
-   const [dailyCovidDataList, setDailyCovidDataList] = useState([]);
-   const [dailyCovidData, setDailyCovidData] = useState();
+   // const [dailyCovidDataList, setDailyCovidDataList] = useState([]);
+   // const [dailyCovidData, setDailyCovidData] = useState();
 
    // Sets variables and the update functions
    // for longitude and latitude
@@ -84,20 +84,20 @@ export default function WebsiteContainer() {
          // mathdroid's Corona api
          const APIData = await fetchData();
          // console.log(APIData);
-         setCovidData(APIData);
+         // setCovidData(APIData);
 
          // array of about-corona's api
          const globalDaily = await fetchGlobalData();
 
          // Sets today's recent Covid Data which is the
          // first element in the array
-         setDailyCovidData(globalDaily[0].confirmed);
+         // setDailyCovidData(globalDaily[0].confirmed);
 
          // Reverses the array so the last element
          // is the most recent day
          // setDailyCovidDataList(globalDaily);
-         const reverse_globalDaily = globalDaily.reverse();
-         setDailyCovidDataList(reverse_globalDaily);
+         // const reverse_globalDaily = globalDaily.reverse();
+         // setDailyCovidDataList(reverse_globalDaily);
          // console.log(reverse_globalDaily);
 
          const placesData = await getPlacesData(placeType, lat, lon);
@@ -135,7 +135,7 @@ export default function WebsiteContainer() {
    const getAndSetCountryData = async (country) => {
       const gd = await fetchData(country);
       // console.log(gd);
-      setCovidData(gd);
+      // setCovidData(gd);
    };
 
    // Searches OpenWeatherMap, calls other functions
@@ -246,10 +246,10 @@ export default function WebsiteContainer() {
    const getCountryDailyCovidData = async (country) => {
       const daily_data = await fetchNewConfirmed(country);
       // console.log(daily_data)
-      setDailyCovidData(daily_data[0].confirmed);
+      // setDailyCovidData(daily_data[0].confirmed);
 
-      const reverse_globalDaily = daily_data.reverse();
-      setDailyCovidDataList(reverse_globalDaily);
+      // const reverse_globalDaily = daily_data.reverse();
+      // setDailyCovidDataList(reverse_globalDaily);
    };
 
    const getNewPlaces = async (type, lat, lon) => {
@@ -356,15 +356,16 @@ export default function WebsiteContainer() {
             key={Corona.screen_name}
             id={Corona.screen_name}
          />
-         <Cards
+        <p align="center" className='covid'>This component is temporarily not working, likely due to the <span>about-corona API</span> halting the collection of COVID data and being discontinued. We are working on finding a new API and supplying current relevant data. Thank you for your patience. <br/> <br/> - the iSky team</p>
+         {/* <Cards
             data={covidData}
             country={country}
             daily={dailyCovidData}
-         ></Cards>
-         <Chart data={dailyCovidDataList} country={country}></Chart>
+         ></Cards> */}
+         {/* <Chart data={dailyCovidDataList} country={country}></Chart>
          <div className="tc">
             <ToastContainer></ToastContainer>
-         </div>
+         </div> */}
       </div>
    );
 }
