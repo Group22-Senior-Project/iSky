@@ -27,7 +27,7 @@ const List = ({ places, placeType, setPlaceType }) => {
             <Select value={placeType} onChange={(e) => setPlaceType(e.target.value)}>
             {/* <Select value={type} onChange={(e) => console.log(e.target.value)}> */}
                <MenuItem value="restaurants">Restaurants</MenuItem>
-               <MenuItem value="hotels">Hotels</MenuItem>
+               {/* <MenuItem value="hotels">Hotels</MenuItem> */}
                <MenuItem value="attractions">Attractions</MenuItem>
             </Select>
          </FormControl>

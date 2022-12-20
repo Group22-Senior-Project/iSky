@@ -38,3 +38,14 @@
    max-width: 100%;
    overflow-x: hidden;
 }
+
+p.covid {
+   margin: auto;
+   font-size: 20px;
+   font-style: italic;
+   width: 50vw;
+}
+
+p.covid span {
+   color: purple;
+}

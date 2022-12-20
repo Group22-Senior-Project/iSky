@@ -12,7 +12,7 @@ import {
    getHistoricalWeather,
 } from '../api';
 
-import Cards from './Corona/Cards.jsx';
+// import Cards from './Corona/Cards.jsx';
 import Chart from './Corona/Chart.jsx';
 import List from './Interest/List/List.jsx';
 
@@ -91,13 +91,13 @@ export default function WebsiteContainer() {
 
          // Sets today's recent Covid Data which is the
          // first element in the array
-         setDailyCovidData(globalDaily[0].confirmed);
+         // setDailyCovidData(globalDaily[0].confirmed);
 
          // Reverses the array so the last element
          // is the most recent day
          // setDailyCovidDataList(globalDaily);
-         const reverse_globalDaily = globalDaily.reverse();
-         setDailyCovidDataList(reverse_globalDaily);
+         // const reverse_globalDaily = globalDaily.reverse();
+         // setDailyCovidDataList(reverse_globalDaily);
          // console.log(reverse_globalDaily);
 
          const placesData = await getPlacesData(placeType, lat, lon);
@@ -246,10 +246,10 @@ export default function WebsiteContainer() {
    const getCountryDailyCovidData = async (country) => {
       const daily_data = await fetchNewConfirmed(country);
       // console.log(daily_data)
-      setDailyCovidData(daily_data[0].confirmed);
+      // setDailyCovidData(daily_data[0].confirmed);
 
-      const reverse_globalDaily = daily_data.reverse();
-      setDailyCovidDataList(reverse_globalDaily);
+      // const reverse_globalDaily = daily_data.reverse();
+      // setDailyCovidDataList(reverse_globalDaily);
    };
 
    const getNewPlaces = async (type, lat, lon) => {
@@ -356,11 +356,12 @@ export default function WebsiteContainer() {
             key={Corona.screen_name}
             id={Corona.screen_name}
          />
-         <Cards
+        <p align="center" className='covid'>This component is temporarily not working, likely due to the <span>about-corona API</span> halting the collection of COVID data and being discontinued. We are working on finding a new API and supplying current relevant data. Thank you for your patience. <br/> <br/> - the iSky team</p>
+         {/* <Cards
             data={covidData}
             country={country}
             daily={dailyCovidData}
-         ></Cards>
+         ></Cards> */}
          <Chart data={dailyCovidDataList} country={country}></Chart>
          <div className="tc">
             <ToastContainer></ToastContainer>
