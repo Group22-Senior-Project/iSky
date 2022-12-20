@@ -50,14 +50,14 @@ export default function WebsiteContainer() {
    // Covid Data and Country
    // country is the country of the city a user selected
    const [country, setCountry] = useState(' ');
-   const [covidData, setCovidData] = useState({});
+   // const [covidData, setCovidData] = useState({});
 
    // -- about-corona API consts --
    // Daily New Covid Data
    // dailyCovidDataList is an array containing last 30 days of Covid data
    // dailyCovidData is the covid data of most recent day
-   const [dailyCovidDataList, setDailyCovidDataList] = useState([]);
-   const [dailyCovidData, setDailyCovidData] = useState();
+   // const [dailyCovidDataList, setDailyCovidDataList] = useState([]);
+   // const [dailyCovidData, setDailyCovidData] = useState();
 
    // Sets variables and the update functions
    // for longitude and latitude
@@ -84,7 +84,7 @@ export default function WebsiteContainer() {
          // mathdroid's Corona api
          const APIData = await fetchData();
          // console.log(APIData);
-         setCovidData(APIData);
+         // setCovidData(APIData);
 
          // array of about-corona's api
          const globalDaily = await fetchGlobalData();
@@ -135,7 +135,7 @@ export default function WebsiteContainer() {
    const getAndSetCountryData = async (country) => {
       const gd = await fetchData(country);
       // console.log(gd);
-      setCovidData(gd);
+      // setCovidData(gd);
    };
 
    // Searches OpenWeatherMap, calls other functions
@@ -362,10 +362,10 @@ export default function WebsiteContainer() {
             country={country}
             daily={dailyCovidData}
          ></Cards> */}
-         <Chart data={dailyCovidDataList} country={country}></Chart>
+         {/* <Chart data={dailyCovidDataList} country={country}></Chart>
          <div className="tc">
             <ToastContainer></ToastContainer>
-         </div>
+         </div> */}
       </div>
    );
 }
