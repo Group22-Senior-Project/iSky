@@ -8,6 +8,14 @@
 
 #### iSky is a vacation planner developed by Anvay Bhanap, Jonathan Lu, Isaac McDonald, and Richard Tran to help people to travel their vacation in a pandemic, recovering world.
 
+# Website Layout
+<img width="1440" alt="isky1" src="https://user-images.githubusercontent.com/53208269/212530011-b461871f-ea19-473c-a03e-bd5a9e9efd2f.png">
+<img width="1440" alt="isky2" src="https://user-images.githubusercontent.com/53208269/212530013-2727e9aa-72a8-4b19-a623-5f18b295588f.png">
+<img width="1440" alt="isky3" src="https://user-images.githubusercontent.com/53208269/212530016-763d7ae7-0d2d-46ac-a5bc-a5b850a4d5c8.png">
+<img width="1440" alt="isky4" src="https://user-images.githubusercontent.com/53208269/212530021-a41fdf46-2189-4506-a759-9cc1a32b3452.png">
+<img width="1440" alt="isky5" src="https://user-images.githubusercontent.com/53208269/212530026-94917f51-3d4a-4508-bf4c-faf6c2d0d829.png">
+
+
 # To run our application locally
 
 1) Clone our repository 
