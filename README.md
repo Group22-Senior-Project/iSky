@@ -2,7 +2,7 @@
 
 # Deployment Link: [iSky](https://isky.netlify.app/)
 - Hi,
-- The deployment for this project has stopped working due to the `about-corona` API being discontinued.
+- The deployment for this project has stopped working due to the [about-corona](https://about-corona.net/) API being discontinued.
 - Until we are able to fix this issue, please use the local version of this project by following [these steps](https://github.com/Group22-Senior-Project/iSky/blob/main/README.md#to-run-our-application-locally) to run it on your machine.
 - Thank you
 
