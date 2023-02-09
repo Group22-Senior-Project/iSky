@@ -2,9 +2,10 @@
 
 # Deployment Link: [iSky](https://isky.netlify.app/)
 - Hi,
-- The deployment for this project is temporarily not working and we are trying to get it up and running ASAP.
-- However, the local version of this project still works, so you can follow [these steps](https://github.com/Group22-Senior-Project/iSky/blob/main/README.md#to-run-our-application-locally) to run it on your machine.
-- Thank you for your patience
+- The deployment for this project has stopped working due to the `about-corona` API being discontinued.
+- Until we are able to fix this issue, please use the local version of this project by following [these steps](https://github.com/Group22-Senior-Project/iSky/blob/main/README.md#to-run-our-application-locally) to run it on your machine.
+- Thank you
+
 
 #### iSky is a vacation planner developed by Anvay Bhanap, Jonathan Lu, Isaac McDonald, and Richard Tran to help people to travel their vacation in a pandemic, recovering world.
 
