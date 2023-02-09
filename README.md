@@ -22,8 +22,17 @@
 # To run our application locally
 
 1) Clone our repository 
-2) ### `npm install`
-3) ### `npm start`
+2) In the project Terminal, run the following commands
+```
+npm install
+npm start
+```
+or 
+```
+yarn add
+yarn start
+```
+3) The project will open on [http://localhost:3000](http://localhost:3000/)
 
 
 # Languages & Tools Used:
